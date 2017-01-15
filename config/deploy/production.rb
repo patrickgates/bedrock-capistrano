@@ -8,7 +8,18 @@ set :stage, :production
 
 # Extended Server Syntax
 # ======================
-server 'example.com', user: 'deploy', roles: %w{web app db}
+set :password, ask('server password: ', nil, echo: false)
+server "production-url.com", user: "example", password: fetch(:password), roles: %w{web app db}
+set :deploy_to, "/home/example/deploy"
+set :tmp_dir, "/home/example/deploy/tmp"
+
+set :branch, "production"
+
+SSHKit.config.command_map[:composer] = "~/composer"
+
+set :wpcli_remote_url, "http://production-url.com"
+
+set :wpcli_backup_db, true
 
 # you can set custom ssh options
 # it's possible to pass any option but you need to keep in mind that net/ssh understand limited list of options

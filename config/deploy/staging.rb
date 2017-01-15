@@ -8,7 +8,16 @@ set :stage, :staging
 
 # Extended Server Syntax
 # ======================
-server 'example.com', user: 'deploy', roles: %w{web app db}
+set :password, ask('server password: ', nil, echo: false)
+server "server-ip", user: "deploy", password: fetch(:password), roles: %w{web app db}
+set :deploy_to, "/home/www/www.example.com/htdocs/"
+
+set :branch, "qa"
+
+set :wpcli_remote_url, "http://staging-url.com"
+
+set :wpcli_backup_db, true
+
 
 # you can set custom ssh options
 # it's possible to pass any option but you need to keep in mind that net/ssh understand limited list of options
