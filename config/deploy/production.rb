@@ -16,6 +16,7 @@ set :tmp_dir, "/home/example/deploy/tmp"
 set :branch, "production"
 
 SSHKit.config.command_map[:composer] = "~/composer"
+SSHKit.config.command_map[:wp] = "~/wp"
 
 set :wpcli_remote_url, "http://production-url.com"
 
